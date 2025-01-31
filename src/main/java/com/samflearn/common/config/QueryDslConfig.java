@@ -1,4 +1,4 @@
-package com.samflearn.config;
+package com.samflearn.common.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;

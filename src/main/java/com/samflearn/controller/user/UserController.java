@@ -6,10 +6,7 @@ import com.samflearn.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
@@ -23,5 +20,12 @@ public class UserController {
         UserResponseDto userResponseDto = userService.createUserService(requestDto);
         return new ResponseEntity<> (userResponseDto, HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
+        userService.deleteUserService(userId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
 }

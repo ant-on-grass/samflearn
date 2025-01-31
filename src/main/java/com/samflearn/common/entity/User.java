@@ -20,6 +20,18 @@ public class User {
 
     private Boolean status;
 
+    @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
+    public User(String name, String email, String password, UserRole userRole) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.status = true;
+        this.userRole = userRole;
+    }
+
+    public User() {
+
+    }
 }

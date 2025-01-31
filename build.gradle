@@ -31,8 +31,36 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jakarta'
+
+    implementation ('com.github.javafaker:javafaker:1.0.2') { exclude module: 'snakeyaml'}
+    implementation group: 'org.yaml', name: 'snakeyaml', version: '2.2'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+
+// queryDSL 시작
+def generated = file('build/generated/querydsl')
+
+tasks.withType(JavaCompile).configureEach {
+    options.getGeneratedSourceOutputDirectory().set(generated)
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', 'build/generated/querydsl']
+        }
+    }
+}
+
+clean {
+    delete generated
+}
+// queryDSL 종료
+

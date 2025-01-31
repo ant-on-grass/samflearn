@@ -18,7 +18,7 @@ public class User {
 
     private String password;
 
-    private Boolean status;
+    private Boolean isDelete;
 
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
@@ -27,11 +27,15 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.status = true;
+        this.isDelete = false;
         this.userRole = userRole;
     }
 
     public User() {
 
+    }
+
+    public void updateStatus() {
+        this.isDelete = !this.isDelete;
     }
 }

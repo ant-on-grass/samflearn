@@ -18,6 +18,8 @@ public class User {
 
     private String password;
 
+    private Boolean status;
+
     private UserRole userRole;
 
 }

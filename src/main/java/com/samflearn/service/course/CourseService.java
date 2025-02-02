@@ -5,6 +5,7 @@ import com.samflearn.common.entity.Course;
 import com.samflearn.common.entity.User;
 import com.samflearn.dto.course.CourseRequestDto;
 import com.samflearn.dto.course.CourseResponseDto;
+import com.samflearn.dto.course.CourseUpdateResponseDto;
 import com.samflearn.repository.course.CourseRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -68,5 +69,19 @@ public class CourseService {
         return courseList.stream()
                 .map(CourseResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public CourseUpdateResponseDto updateCourse(Long id, CourseRequestDto requestDto) {
+        queryFactory = new JPAQueryFactory(em);
+
+        Course findCourse = queryFactory
+                .selectFrom(course)
+                .where(course.id.eq(id))
+                .fetchOne();
+        findCourse.updateCourse(requestDto);
+        Course updateCourse = courseRepository.save(findCourse);
+
+        return CourseUpdateResponseDto.courseUpdateResponseDto(updateCourse);
     }
 }

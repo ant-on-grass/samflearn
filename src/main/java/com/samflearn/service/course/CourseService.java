@@ -6,19 +6,17 @@ import com.samflearn.common.entity.User;
 import com.samflearn.dto.course.CourseRequestDto;
 import com.samflearn.dto.course.CourseResponseDto;
 import com.samflearn.repository.course.CourseRepository;
-import com.samflearn.repository.user.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.samflearn.common.entity.QCourse.course;
+import static com.samflearn.common.entity.QUser.user;
 
 
 @Service
@@ -26,17 +24,20 @@ import static com.samflearn.common.entity.QCourse.course;
 public class CourseService {
 
     private final CourseRepository courseRepository;
-    private final UserRepository userRepository;
 
     @PersistenceContext
     EntityManager em;
     JPAQueryFactory queryFactory;
 
     public Course createCourse(CourseRequestDto requestDto) {
-        User user = userRepository.findById(requestDto.getUser_id())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        queryFactory = new JPAQueryFactory(em);
 
-        Course course = new Course(requestDto.getCourse_name(), requestDto.getCourse_price(), requestDto.getCategory(),user);
+        User fetchOne = queryFactory
+                .selectFrom(user)
+                .where(user.id.eq(requestDto.getUser_id()))
+                .fetchOne();
+
+        Course course = new Course(requestDto.getCourse_name(), requestDto.getCourse_price(), requestDto.getCategory(),fetchOne);
 
         return courseRepository.save(course);
     }

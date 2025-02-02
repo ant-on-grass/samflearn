@@ -54,4 +54,12 @@ public class CourseController {
         CourseUpdateResponseDto updateCourse = courseService.updateCourse(id,requestDto);
         return new ResponseEntity<>(updateCourse, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CourseResponseDto> deleteCourse(
+            @PathVariable Long id){
+        courseService.deleteCourse(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

@@ -84,4 +84,8 @@ public class CourseService {
 
         return CourseUpdateResponseDto.courseUpdateResponseDto(updateCourse);
     }
+
+    public void deleteCourse(Long id) {
+        courseRepository.deleteById(id);
+    }
 }

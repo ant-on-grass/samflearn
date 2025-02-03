@@ -1,4 +1,4 @@
-package com.samflearn.common.entity;
+package com.samflearn.common.entity.course;
 
 import com.samflearn.common.entity.user.User;
 import com.samflearn.dto.course.CourseRequestDto;
@@ -18,8 +18,8 @@ public class Course {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private String course_name;
-    private Integer course_price;
+    private String courseName;
+    private Integer coursePrice;
 
     @Enumerated(EnumType.STRING)
     private CourseCategory category;
@@ -28,19 +28,19 @@ public class Course {
 
     }
 
-    public Course(String course_name, Integer course_price, CourseCategory category,User user) {
-        this.course_name = course_name;
-        this.course_price = course_price;
+    public Course(String courseName, Integer coursePrice, CourseCategory category,User user) {
+        this.courseName = courseName;
+        this.coursePrice = coursePrice;
         this.category = category;
         this.user = user;
     }
 
     public void updateCourse(CourseRequestDto requestDto) {
-        if (requestDto.getCourse_name() != null && !requestDto.getCourse_name().isEmpty()) {
-            this.course_name = requestDto.getCourse_name();
+        if (requestDto.getCourseName() != null && !requestDto.getCourseName().isEmpty()) {
+            this.courseName = requestDto.getCourseName();
         }
-        if (requestDto.getCourse_price() != null) {
-            this.course_price = requestDto.getCourse_price();
+        if (requestDto.getCoursePrice() != null) {
+            this.coursePrice = requestDto.getCoursePrice();
         }
         if (requestDto.getCategory() != null) {
             this.category = requestDto.getCategory();

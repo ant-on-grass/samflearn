@@ -1,4 +1,4 @@
-package com.samflearn.common.entity;
+package com.samflearn.common.entity.course;
 
 public enum CourseCategory {
     PROGRAMMING, //프로그래밍

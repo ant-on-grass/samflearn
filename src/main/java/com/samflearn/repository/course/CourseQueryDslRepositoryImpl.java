@@ -4,6 +4,7 @@ import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Wildcard;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.samflearn.common.entity.course.Course;
@@ -78,18 +79,18 @@ public class CourseQueryDslRepositoryImpl implements CourseQueryDslRepository {
 
     @Override
     public List<CourseSortByLikeResponseDto> findPageCoursesByLike() {
-        JPQLQuery<Long> likeCount = select(Wildcard.count)
-                .from(course)
-                .where(course.id.eq(like.course.id));
         List<CourseSortByLikeResponseDto> courseList = queryFactory.select(
                         Projections.constructor(
                             CourseSortByLikeResponseDto.class,
                                 course,
-                                likeCount
+                            JPAExpressions.
+                            select(like.id.count())
+                                .from(course)
+                                .where(course.id.eq(like.course.id))
                         )
                 )
                 .from(course)
-                .leftJoin(course).on(like.course.id.eq(course.id))
+                .leftJoin(like).on(like.course.id.eq(course.id))
                 .fetchJoin()
                 .groupBy(course.id)
                 .limit(10L)

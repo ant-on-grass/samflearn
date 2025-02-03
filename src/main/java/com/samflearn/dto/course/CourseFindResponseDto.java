@@ -17,7 +17,7 @@ public class CourseFindResponseDto {
 
     private CourseCategory category;
 
-    private CourseFindResponseDto(Course course) {
+    public CourseFindResponseDto(Course course) {
 
         this.id = course.getId();
         this.user_id = course.getUser().getId();

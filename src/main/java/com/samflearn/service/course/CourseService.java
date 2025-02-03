@@ -3,6 +3,7 @@ package com.samflearn.service.course;
 import com.samflearn.common.entity.course.Course;
 import com.samflearn.common.entity.user.User;
 import com.samflearn.common.exception.user.NotFoundException;
+import com.samflearn.dto.course.CourseFindResponseDto;
 import com.samflearn.dto.course.CourseRequestDto;
 import com.samflearn.dto.course.CourseResponseDto;
 import com.samflearn.dto.course.CourseSortByLikeResponseDto;
@@ -11,6 +12,8 @@ import com.samflearn.repository.course.CourseRepository;
 import com.samflearn.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -67,6 +70,13 @@ public class CourseService {
 
         return CourseUpdateResponseDto.courseUpdateResponseDto(updatedCourse);
     }
+
+    @Transactional
+    public Page<CourseFindResponseDto> findCourse(Pageable pageable, String course_name)
+    {
+        return courseRepository.findPageCourses(pageable ,course_name);
+    }
+
 
     public void deleteCourse(Long id) {
         courseRepository.deleteById(id);

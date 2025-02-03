@@ -3,7 +3,9 @@ package com.samflearn.dto.course;
 import com.samflearn.common.entity.course.Course;
 import com.samflearn.common.entity.course.CourseCategory;
 import com.samflearn.common.entity.like.Like;
+import lombok.Getter;
 
+@Getter
 public class CourseSortByLikeResponseDto {
 
     private Long id;
@@ -16,9 +18,9 @@ public class CourseSortByLikeResponseDto {
 
     private CourseCategory category;
 
-    private Integer courseByLikeCount;
+    private long courseByLikeCount;
 
-    public CourseSortByLikeResponseDto(Course course, Integer courseByLikeCount) {
+    public CourseSortByLikeResponseDto(Course course, long courseByLikeCount) {
 
         this.id = course.getId();
         this.user_id = course.getUser().getId();

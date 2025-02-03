@@ -1,7 +1,7 @@
 package com.samflearn.service.course;
 
-import com.samflearn.common.entity.Course;
-import com.samflearn.common.entity.User;
+import com.samflearn.common.entity.course.Course;
+import com.samflearn.common.entity.user.User;
 import com.samflearn.dto.course.CourseRequestDto;
 import com.samflearn.dto.course.CourseResponseDto;
 import com.samflearn.dto.course.CourseUpdateResponseDto;
@@ -20,11 +20,11 @@ public class CourseService {
     private final CourseRepository courseRepository;
 
     public Course createCourse(CourseRequestDto requestDto) {
-        User user = courseRepository.findUserById(requestDto.getUser_id());
+        User user = courseRepository.findUserById(requestDto.getUserId());
 
         Course course = new Course(
-                requestDto.getCourse_name(),
-                requestDto.getCourse_price(),
+                requestDto.getCourseName(),
+                requestDto.getCoursePrice(),
                 requestDto.getCategory(),
                 user
         );

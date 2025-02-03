@@ -1,23 +1,23 @@
 package com.samflearn.dto.course;
 
-import com.samflearn.common.entity.Course;
-import com.samflearn.common.entity.CourseCategory;
-import com.samflearn.dto.user.UserResponseDto;
+import com.samflearn.common.entity.course.Course;
+import com.samflearn.common.entity.course.CourseCategory;
+import com.samflearn.dto.user.UserNameResponseDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
 public class CourseResponseDto {
-    private String course_name;
-    private UserResponseDto user;
-    private Integer course_price;
+    private String courseName;
+    private UserNameResponseDto user;
+    private Integer coursePrice ;
     private CourseCategory category;
 
     public CourseResponseDto(Course course){
-        this.course_name = course.getCourse_name();
-        this.user = new UserResponseDto(course.getUser());
-        this.course_price = course.getCourse_price();
+        this.courseName = course.getCourseName();
+        this.user = new UserNameResponseDto(course.getUser());
+        this.coursePrice = course.getCoursePrice();
         this.category = course.getCategory();
     }
 }

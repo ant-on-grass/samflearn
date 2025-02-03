@@ -1,5 +1,7 @@
 package com.samflearn.repository.course;
 
-public class CourseRepository {
+import com.samflearn.common.entity.Course;
+import org.springframework.data.jpa.repository.JpaRepository;
 
+public interface CourseRepository extends JpaRepository<Course,Long>,CourseQueryDslRepository {
 }

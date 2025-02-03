@@ -1,11 +1,15 @@
 package com.samflearn.controller.course;
 
 import com.samflearn.common.entity.course.Course;
+import com.samflearn.dto.course.CourseFindResponseDto;
 import com.samflearn.dto.course.CourseRequestDto;
 import com.samflearn.dto.course.CourseResponseDto;
+import com.samflearn.dto.course.CourseSortByLikeResponseDto;
 import com.samflearn.dto.course.CourseUpdateResponseDto;
 import com.samflearn.service.course.CourseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +46,24 @@ public class CourseController {
             @PathVariable String courseName
     ){
         List<CourseResponseDto> findCourseList = courseService.findLikeCourse(courseName);
+
+        return new ResponseEntity<>(findCourseList, HttpStatus.OK);
+    }
+
+    @GetMapping("/v1/")
+    public ResponseEntity<Page<CourseFindResponseDto>> findCourseAPI(Pageable pageable,
+        @RequestParam String courseName
+    ){
+        Page<CourseFindResponseDto> findCourseList = courseService.findCourse(pageable,courseName);
+
+        return new ResponseEntity<>(findCourseList, HttpStatus.OK);
+    }
+
+    @GetMapping("/v1")
+    public ResponseEntity<List<CourseSortByLikeResponseDto>> findLikeCourseAPI(
+
+    ){
+        List<CourseSortByLikeResponseDto> findCourseList = courseService.findCourseByLike();
 
         return new ResponseEntity<>(findCourseList, HttpStatus.OK);
     }

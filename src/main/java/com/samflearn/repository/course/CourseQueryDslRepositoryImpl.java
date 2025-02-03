@@ -2,14 +2,12 @@ package com.samflearn.repository.course;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.samflearn.common.entity.Course;
-import com.samflearn.common.entity.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 import static com.samflearn.common.entity.QCourse.course;
-import static com.samflearn.common.entity.user.QUser.user;
 
 @Repository
 @RequiredArgsConstructor
@@ -34,13 +32,6 @@ public class CourseQueryDslRepositoryImpl implements CourseQueryDslRepository {
     public Course findCourseById(Long id) {
         return queryFactory.selectFrom(course)
                 .where(course.id.eq(id))
-                .fetchOne();
-    }
-
-    @Override
-    public User findUserById(Long userId) {
-        return queryFactory.selectFrom(user)
-                .where(user.id.eq(userId))
                 .fetchOne();
     }
 }

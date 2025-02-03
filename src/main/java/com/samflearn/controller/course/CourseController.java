@@ -1,6 +1,6 @@
 package com.samflearn.controller.course;
 
-import com.samflearn.common.entity.Course;
+import com.samflearn.common.entity.course.Course;
 import com.samflearn.dto.course.CourseRequestDto;
 import com.samflearn.dto.course.CourseResponseDto;
 import com.samflearn.dto.course.CourseUpdateResponseDto;
@@ -37,11 +37,11 @@ public class CourseController {
         return new ResponseEntity<>(findCourseList, HttpStatus.OK);
     }
 
-    @GetMapping("/{course_name}")
+    @GetMapping("/{courseName}")
     public ResponseEntity<List<CourseResponseDto>> findLikeCourse(
-            @PathVariable String course_name
+            @PathVariable String courseName
     ){
-        List<CourseResponseDto> findCourseList = courseService.findLikeCourse(course_name);
+        List<CourseResponseDto> findCourseList = courseService.findLikeCourse(courseName);
 
         return new ResponseEntity<>(findCourseList, HttpStatus.OK);
     }

@@ -2,14 +2,14 @@ package com.samflearn.repository.course;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.samflearn.common.entity.Course;
-import com.samflearn.common.entity.User;
+import com.samflearn.common.entity.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 import static com.samflearn.common.entity.QCourse.course;
-import static com.samflearn.common.entity.QUser.user;
+import static com.samflearn.common.entity.user.QUser.user;
 
 @Repository
 @RequiredArgsConstructor

@@ -1,5 +1,6 @@
 package com.samflearn.common.entity.like;
 
+import com.samflearn.common.entity.Course;
 import com.samflearn.common.entity.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;

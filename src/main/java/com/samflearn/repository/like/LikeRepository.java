@@ -1,5 +1,6 @@
 package com.samflearn.repository.like;
 
+import com.samflearn.common.entity.Course;
 import com.samflearn.common.entity.like.Like;
 import com.samflearn.common.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;

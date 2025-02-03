@@ -16,7 +16,7 @@ public class CourseResponseDto {
 
     public CourseResponseDto(Course course){
         this.course_name = course.getCourse_name();
-        this.user = new UserResponseDto(course.getUser());
+        this.user = getUser();
         this.course_price = course.getCourse_price();
         this.category = course.getCategory();
     }

@@ -1,5 +1,6 @@
 package com.samflearn.service.like;
 
+import com.samflearn.common.entity.Course;
 import com.samflearn.common.entity.like.Like;
 import com.samflearn.common.entity.user.User;
 import com.samflearn.common.exception.user.NotFoundException;

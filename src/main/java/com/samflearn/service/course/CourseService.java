@@ -1,7 +1,8 @@
 package com.samflearn.service.course;
 
 import com.samflearn.common.entity.Course;
-import com.samflearn.common.entity.User;
+import com.samflearn.common.entity.user.User;
+import com.samflearn.common.entity.user.User;
 import com.samflearn.dto.course.CourseRequestDto;
 import com.samflearn.dto.course.CourseResponseDto;
 import com.samflearn.dto.course.CourseUpdateResponseDto;

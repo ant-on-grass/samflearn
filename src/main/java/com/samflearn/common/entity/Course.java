@@ -1,5 +1,6 @@
 package com.samflearn.common.entity;
 
+import com.samflearn.common.entity.user.User;
 import com.samflearn.dto.course.CourseRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;

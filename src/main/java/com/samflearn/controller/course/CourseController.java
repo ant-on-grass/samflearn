@@ -3,6 +3,7 @@ package com.samflearn.controller.course;
 import com.samflearn.common.entity.course.Course;
 import com.samflearn.dto.course.CourseRequestDto;
 import com.samflearn.dto.course.CourseResponseDto;
+import com.samflearn.dto.course.CourseSortByLikeResponseDto;
 import com.samflearn.dto.course.CourseUpdateResponseDto;
 import com.samflearn.service.course.CourseService;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +43,15 @@ public class CourseController {
             @PathVariable String courseName
     ){
         List<CourseResponseDto> findCourseList = courseService.findLikeCourse(courseName);
+
+        return new ResponseEntity<>(findCourseList, HttpStatus.OK);
+    }
+
+    @GetMapping("/v1")
+    public ResponseEntity<List<CourseSortByLikeResponseDto>> findLikeCourseAPI(
+
+    ){
+        List<CourseSortByLikeResponseDto> findCourseList = courseService.findCourseByLike();
 
         return new ResponseEntity<>(findCourseList, HttpStatus.OK);
     }

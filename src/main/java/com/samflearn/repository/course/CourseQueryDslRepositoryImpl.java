@@ -8,6 +8,7 @@ import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.samflearn.common.entity.course.Course;
 import com.samflearn.dto.course.CourseFindResponseDto;
+import com.samflearn.dto.course.CourseSortByLikeResponseDto;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
@@ -76,22 +77,27 @@ public class CourseQueryDslRepositoryImpl implements CourseQueryDslRepository {
     }
 
     @Override
-    public List<CourseFindResponseDto> findPageCoursesByLike() {
+    public List<CourseSortByLikeResponseDto> findPageCoursesByLike() {
         JPQLQuery<Long> likeCount = select(Wildcard.count)
-                .from(like)
+                .from(course)
                 .where(course.id.eq(like.course.id));
-        List<CourseFindResponseDto> courseList = queryFactory.select(
+        List<CourseSortByLikeResponseDto> courseList = queryFactory.select(
                         Projections.constructor(
-                                CourseFindResponseDto.class,
+                            CourseSortByLikeResponseDto.class,
                                 course,
                                 likeCount
                         )
                 )
                 .from(course)
+                .leftJoin(course).on(like.course.id.eq(course.id))
+                .fetchJoin()
                 .groupBy(course.id)
                 .limit(10L)
-//                .orderBy(desc())
+                .orderBy(like.id.count().desc())
                 .fetch();
+
+        // 조인
+        // 쿼리 // ㅜ
 
 
         return courseList;

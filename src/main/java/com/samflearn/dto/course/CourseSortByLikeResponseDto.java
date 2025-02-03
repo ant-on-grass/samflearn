@@ -18,7 +18,7 @@ public class CourseSortByLikeResponseDto {
 
     private Integer courseByLikeCount;
 
-    private CourseSortByLikeResponseDto(Course course, Integer courseByLikeCount) {
+    public CourseSortByLikeResponseDto(Course course, Integer courseByLikeCount) {
 
         this.id = course.getId();
         this.user_id = course.getUser().getId();

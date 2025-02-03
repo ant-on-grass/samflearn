@@ -5,6 +5,7 @@ import com.samflearn.common.entity.user.User;
 import com.samflearn.common.exception.user.NotFoundException;
 import com.samflearn.dto.course.CourseRequestDto;
 import com.samflearn.dto.course.CourseResponseDto;
+import com.samflearn.dto.course.CourseSortByLikeResponseDto;
 import com.samflearn.dto.course.CourseUpdateResponseDto;
 import com.samflearn.repository.course.CourseRepository;
 import com.samflearn.repository.user.UserRepository;
@@ -49,6 +50,12 @@ public class CourseService {
         return courseRepository.findLikeCourse(course_name).stream()
                 .map(CourseResponseDto::new)
                 .collect(Collectors.toList());
+    }
+//
+    @Transactional
+    public List<CourseSortByLikeResponseDto> findCourseByLike()
+    {
+        return courseRepository.findPageCoursesByLike();
     }
 
     @Transactional

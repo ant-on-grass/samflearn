@@ -2,11 +2,12 @@ package com.samflearn.service.course;
 
 import com.samflearn.common.entity.Course;
 import com.samflearn.common.entity.user.User;
-import com.samflearn.common.entity.user.User;
+import com.samflearn.common.exception.user.NotFoundException;
 import com.samflearn.dto.course.CourseRequestDto;
 import com.samflearn.dto.course.CourseResponseDto;
 import com.samflearn.dto.course.CourseUpdateResponseDto;
 import com.samflearn.repository.course.CourseRepository;
+import com.samflearn.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,15 +20,17 @@ import java.util.stream.Collectors;
 public class CourseService {
 
     private final CourseRepository courseRepository;
+    private final UserRepository userRepository;
 
     public Course createCourse(CourseRequestDto requestDto) {
-        User user = courseRepository.findUserById(requestDto.getUser_id());
+        User findUser = userRepository.findById(requestDto.getUser_id())
+                .orElseThrow(() -> new NotFoundException("유저를 찾을 수 없습니다."));
 
         Course course = new Course(
                 requestDto.getCourse_name(),
                 requestDto.getCourse_price(),
                 requestDto.getCategory(),
-                user
+                findUser
         );
 
         return courseRepository.save(course);

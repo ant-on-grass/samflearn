@@ -50,9 +50,9 @@ public class CourseController {
         return new ResponseEntity<>(findCourseList, HttpStatus.OK);
     }
 
-    @GetMapping("/v1/{courseName}")
+    @GetMapping("/v1/")
     public ResponseEntity<Page<CourseFindResponseDto>> findCourseAPI(Pageable pageable,
-        @PathVariable String courseName
+        @RequestParam String courseName
     ){
         Page<CourseFindResponseDto> findCourseList = courseService.findCourse(pageable,courseName);
 

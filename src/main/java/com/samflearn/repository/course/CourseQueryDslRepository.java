@@ -1,6 +1,6 @@
 package com.samflearn.repository.course;
 
-import com.samflearn.common.entity.Course;
+import com.samflearn.common.entity.course.Course;
 
 import java.util.List;
 

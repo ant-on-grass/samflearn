@@ -1,6 +1,6 @@
 package com.samflearn.service.course;
 
-import com.samflearn.common.entity.Course;
+import com.samflearn.common.entity.course.Course;
 import com.samflearn.common.entity.user.User;
 import com.samflearn.common.exception.user.NotFoundException;
 import com.samflearn.dto.course.CourseRequestDto;
@@ -23,12 +23,12 @@ public class CourseService {
     private final UserRepository userRepository;
 
     public Course createCourse(CourseRequestDto requestDto) {
-        User findUser = userRepository.findById(requestDto.getUser_id())
+        User findUser = userRepository.findById(requestDto.getUserId())
                 .orElseThrow(() -> new NotFoundException("유저를 찾을 수 없습니다."));
 
         Course course = new Course(
-                requestDto.getCourse_name(),
-                requestDto.getCourse_price(),
+                requestDto.getCourseName(),
+                requestDto.getCoursePrice(),
                 requestDto.getCategory(),
                 findUser
         );

@@ -1,13 +1,13 @@
 package com.samflearn.repository.course;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.samflearn.common.entity.Course;
+import com.samflearn.common.entity.course.Course;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.samflearn.common.entity.QCourse.course;
+import static com.samflearn.common.entity.course.QCourse.course;
 
 @Repository
 @RequiredArgsConstructor
@@ -24,7 +24,7 @@ public class CourseQueryDslRepositoryImpl implements CourseQueryDslRepository {
     @Override
     public List<Course> findLikeCourse(String courseName) {
         return queryFactory.selectFrom(course)
-                .where(course.course_name.like("%" + courseName + "%"))
+                .where(course.courseName.like("%" + courseName + "%"))
                 .fetch();
     }
 

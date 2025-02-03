@@ -1,6 +1,6 @@
 package com.samflearn.common.entity.like;
 
-import com.samflearn.common.entity.Course;
+import com.samflearn.common.entity.course.Course;
 import com.samflearn.common.entity.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "like")
+@Table(name = "likes")
 @NoArgsConstructor
 public class Like {
 

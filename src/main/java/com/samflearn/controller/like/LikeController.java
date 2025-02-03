@@ -14,23 +14,23 @@ public class LikeController {
 
     private final LikeService likeService;
 
-    @PostMapping("/{userId}/{courseId}")
+    @PostMapping
     public ResponseEntity<Void> createLike(
-            @PathVariable Long userId,
-            @PathVariable Long courseId
+            @RequestParam Long user,
+            @RequestParam Long course
     ) {
-        likeService.createLikeService(userId, courseId);
+        likeService.createLikeService(user, course);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/{likeId}/{userId}/{courseId}")
+    @DeleteMapping
     public ResponseEntity<Void> deleteLike(
-            @PathVariable Long likeId,
-            @PathVariable Long userId,
-            @PathVariable Long courseId
+            @RequestParam Long like,
+            @RequestParam Long user,
+            @RequestParam Long course
     ) {
-        likeService.deleteLikeService(likeId, userId, courseId);
+        likeService.deleteLikeService(like, user, course);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

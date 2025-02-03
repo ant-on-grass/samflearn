@@ -1,7 +1,7 @@
 package com.samflearn.dto.user;
 
-import com.samflearn.common.entity.User;
-import com.samflearn.common.entity.UserRole;
+import com.samflearn.common.entity.user.User;
+import com.samflearn.common.entity.user.UserRole;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

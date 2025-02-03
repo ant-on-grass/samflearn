@@ -1,4 +1,4 @@
-package com.samflearn.common.entity;
+package com.samflearn.common.entity.user;
 
 import jakarta.persistence.*;
 import lombok.Getter;

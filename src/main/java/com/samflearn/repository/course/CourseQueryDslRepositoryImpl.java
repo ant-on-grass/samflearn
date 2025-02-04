@@ -8,6 +8,7 @@ import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.samflearn.common.entity.course.Course;
+import com.samflearn.common.generic.CustomPageImpl;
 import com.samflearn.dto.course.CourseFindResponseDto;
 import com.samflearn.dto.course.CourseSortByLikeResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -73,7 +74,7 @@ public class CourseQueryDslRepositoryImpl implements CourseQueryDslRepository {
                 .from(course)
                 .fetchOne()).orElse(0L);
 
-        return new PageImpl<>(courseList,pageable,totalCount);
+        return new CustomPageImpl<>(courseList,pageable,totalCount);
 
     }
 

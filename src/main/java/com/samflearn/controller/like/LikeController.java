@@ -16,8 +16,8 @@ public class LikeController {
 
     @PostMapping
     public ResponseEntity<Void> createLike(
-            @RequestParam Long user,
-            @RequestParam Long course
+            @RequestParam("user") Long user,
+            @RequestParam("course") Long course
     ) {
         likeService.createLikeService(user, course);
 

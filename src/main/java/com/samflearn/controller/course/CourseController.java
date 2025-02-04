@@ -50,11 +50,20 @@ public class CourseController {
         return new ResponseEntity<>(findCourseList, HttpStatus.OK);
     }
 
-    @GetMapping("/v1/")
+    @GetMapping("/v1/like")
     public ResponseEntity<Page<CourseFindResponseDto>> findCourseAPI(Pageable pageable,
-        @RequestParam String courseName
+        @RequestParam("courseName") String courseName
     ){
         Page<CourseFindResponseDto> findCourseList = courseService.findCourse(pageable,courseName);
+
+        return new ResponseEntity<>(findCourseList, HttpStatus.OK);
+    }
+
+    @GetMapping("/v2/like")
+    public ResponseEntity<Page<CourseFindResponseDto>> findCourseV2API(Pageable pageable,
+                                                                     @RequestParam("courseName") String courseName
+    ){
+        Page<CourseFindResponseDto> findCourseList = courseService.findCourseV2(pageable,courseName);
 
         return new ResponseEntity<>(findCourseList, HttpStatus.OK);
     }

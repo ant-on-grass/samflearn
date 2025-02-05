@@ -36,7 +36,7 @@
 **기술 스택**
 <br>
 <br>
-<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=spring&logoColor=white"> <img src="https://img.shields.io/badge/redis-FF4438?style=for-the-badge&logo=spring&logoColor=white"> <img src="https://img.shields.io/badge/k6-7D64FF?style=for-the-badge&logo=spring&logoColor=white"> 
+<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/redis-FF4438?style=for-the-badge&logo=redis&logoColor=white"> <img src="https://img.shields.io/badge/k6-7D64FF?style=for-the-badge&logo=k6&logoColor=white"> 
 <br>
 <br>
 
@@ -61,33 +61,82 @@ like - CD
 <br>
 <br>
 
+v1 : DSL 조회 // v2 : CACHE 조회
+
+<br>
+<br>
+
 vus : 100 // duration 30 초
 
-<br>
-<br>
-
-course 데이터 1,000 건 (히카리 변경 x )
 
 <br>
 
-course 데이터 1,000 건 (히카리 변경 o )
+**course 데이터 1,000 건 (히카리 변경 x )**
+<details><summary> v1 
+</summary>
+  
+</details>
+<details><summary> v2 
+</summary>
+  
+</details>
 
 <br>
 
-course 데이터 10만 건  (히카리 변경 x )
+**course 데이터 1,000 건 (히카리 변경 o )**
+<details><summary> v1 
+</summary>
+  
+</details>
+<details><summary> v2 
+</summary>
+  
+</details>
 
 <br>
 
-course 데이터 10만 건  (히카리 변경 o )
-
+**course 데이터 10만 건  (히카리 변경 x )**
+<details><summary> v1 
+</summary>
+  
+</details>
+<details><summary> v2 
+</summary>
+  
+</details>
 <br>
 
-course 데이터 10만 건  (쓰레드 변경 x )
-
+**course 데이터 10만 건  (히카리 변경 o )**
+<details><summary> v1 
+</summary>
+  
+</details>
+<details><summary> v2 
+</summary>
+  
+</details>
 <br>
 
-course 데이터 10만 건  (쓰레드 변경 o )
+**course 데이터 10만 건  (쓰레드 변경 x )**
+<details><summary> v1 
+</summary>
+  
+</details>
+<details><summary> v2 
+</summary>
+  
+</details>
+<br>
 
+**course 데이터 10만 건  (쓰레드 변경 o )**
+<details><summary> v1 
+</summary>
+  
+</details>
+<details><summary> v2 
+</summary>
+  
+</details>
 <br>
 <br>
 
@@ -101,13 +150,6 @@ course 데이터 10만 건  (쓰레드 변경 o )
 <br>
 
 ---
-
-<details><summary> 느낀점
-</summary>
-
-</details>
-<br>
-<br>
 
 <br>
 <br>

@@ -72,8 +72,8 @@ course 데이터 10만 건  (쓰레드 변경 o )
 
 | 이름 | 깃허브 |
 | --- | --- |
-| 민진홍 | [2](https://github.com/wls313) |
-| 송진솔 | jinsolsong (Jinsol) |
-| 김태은 | [8](https://github.com/ant-on-grass) |
+| 민진홍 | [wls313](https://github.com/wls313) |
+| 송진솔 | [jinsolsong (Jinsol)](https://github.com/jinsolsong) |
+| 김태은 | [ant-on-grass](https://github.com/ant-on-grass) |
 
 

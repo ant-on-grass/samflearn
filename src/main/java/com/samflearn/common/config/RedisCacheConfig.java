@@ -1,12 +1,20 @@
 package com.samflearn.common.config;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
+import com.samflearn.common.generic.CustomPageImpl;
+import com.samflearn.dto.course.CourseFindResponseDto;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -16,8 +24,10 @@ import java.time.Duration;
 @Configuration
 @EnableCaching // Spring Boot의 캐싱 설정을 활성화
 public class RedisCacheConfig {
+
     @Bean
-    public CacheManager boardCacheManager(RedisConnectionFactory redisConnectionFactory) {
+    public CacheManager coursePageCacheManager(RedisConnectionFactory redisConnectionFactory) {
+
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration
                 .defaultCacheConfig()
                 // Redis에 Key를 저장할 때 String으로 직렬화(변환)해서 저장
@@ -27,7 +37,7 @@ public class RedisCacheConfig {
                 // Redis에 Value를 저장할 때 Json으로 직렬화(변환)해서 저장
                 .serializeValuesWith(
                         RedisSerializationContext.SerializationPair.fromSerializer(
-                                new Jackson2JsonRedisSerializer<Object>(Object.class)
+new Jackson2JsonRedisSerializer<>(CustomPageImpl.class)
                         )
                 )
                 // 데이터의 만료기간(TTL) 설정

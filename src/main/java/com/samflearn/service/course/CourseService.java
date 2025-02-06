@@ -1,5 +1,7 @@
 package com.samflearn.service.course;
 
+import aj.org.objectweb.asm.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.samflearn.common.entity.course.Course;
 import com.samflearn.common.entity.user.User;
 import com.samflearn.common.exception.user.NotFoundException;
@@ -12,11 +14,18 @@ import com.samflearn.repository.course.CourseRepository;
 import com.samflearn.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,6 +34,9 @@ public class CourseService {
 
     private final CourseRepository courseRepository;
     private final UserRepository userRepository;
+    private final CacheManager coursePageCacheManager;
+    private final RedisTemplate<Object, Object> redisTemplate;
+    private final ObjectMapper objectMapper;
 
     public Course createCourse(CourseRequestDto requestDto) {
         User findUser = userRepository.findById(requestDto.getUserId())
@@ -74,6 +86,15 @@ public class CourseService {
     @Transactional
     public Page<CourseFindResponseDto> findCourse(Pageable pageable, String course_name)
     {
+
+        return courseRepository.findPageCourses(pageable ,course_name);
+    }
+
+    @Cacheable(cacheNames = "course",key = "'course_Name:' + #p1",cacheManager = "coursePageCacheManager")
+    @Transactional
+    public Page<CourseFindResponseDto> findCourseV2(Pageable pageable, String course_name)
+    {
+
         return courseRepository.findPageCourses(pageable ,course_name);
     }
 

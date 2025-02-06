@@ -2,6 +2,8 @@ package com.samflearn.service.coupon;
 
 import com.samflearn.common.entity.coupon.Coupon;
 import com.samflearn.repository.coupon.CouponRepository;
+import com.samflearn.repository.user.UserRepository;
+import com.samflearn.service.redislock.RedisLockService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,6 +30,9 @@ class CouponServiceTest {
 
     @Autowired
     private CouponRedissonLockService couponRedissonLockService;
+
+    @Autowired
+    private RedisLockService redisLockService;
 
     private Coupon coupon;
 
@@ -117,6 +122,39 @@ class CouponServiceTest {
             executorService.submit(()-> {
                 try {
                     couponService.callOptimisticLock(coupon.getId());
+                } finally {
+                    latch.countDown();
+                }
+            });
+
+        }
+        latch.await();
+        executorService.shutdown();
+        //then
+
+        Coupon persistedCoupon = couponRepository.findById(coupon.getId())
+                .orElseThrow(IllegalArgumentException::new); // 쿠폰 조회
+        assertThat(persistedCoupon.getQuantity(), equalTo(0L)); // 잔여 쿠폰 수량은 0이어야 한다
+        System.out.println("잔여 쿠폰 수량: " + persistedCoupon.getQuantity());
+    }
+
+    @Test
+    @DisplayName("동시에 요청 100개_redis_사용")
+    public void request_100_atTheSameTime_With_RedisLock () throws InterruptedException {
+        //given
+        //테스트에서 동시에 사용할 스레드 수 100개
+        int threadCount = 100;
+        //스레드 풀 생성(한번에 최대 20개의 스레드를 사용)
+        ExecutorService executorService = Executors.newFixedThreadPool(20);
+        //여러 스레드가 완료 될 때까지 기다리는 역할(100개)
+        CountDownLatch latch = new CountDownLatch(threadCount);
+
+        //when
+        for (int i = 0; i < 100; i++) {
+            executorService.submit(()-> {
+                try {
+                    couponService.getCouponServiceWithRedis(coupon.getId());
+
                 } finally {
                     latch.countDown();
                 }

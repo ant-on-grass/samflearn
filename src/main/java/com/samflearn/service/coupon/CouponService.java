@@ -6,6 +6,8 @@ import com.samflearn.repository.coupon.CouponRepository;
 import com.samflearn.service.redislock.RedisLockService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,9 +79,17 @@ public class CouponService {
         return failureCount;
     }
 
+    @Retryable(
+            maxAttempts = 10,
+            backoff = @Backoff(
+                    delay = 1500,
+                    multiplier = 3
+            )
+    )
     public void getCouponServiceWithRedis(Long couponId) {
 
-        if (redisLockService.tryLock() == true) {
+
+        if (redisLockService.tryLock()) {
             log.info("락 키를 받았다");
             Coupon coupon = couponRepository.findById(couponId)
                     .orElseThrow(()-> new NotFoundException("존재하지 않는 쿠폰입니다"));
@@ -95,7 +105,7 @@ public class CouponService {
             log.info("락 키를 반납했다");
             return;
         }
-        log.info("락 키를 받지 못해서 종료되었다");
+        log.info("락 키를 받지 못해서 종료되었다"); //종료되는게 아니라 재시도로 변경.
     }
 
 }

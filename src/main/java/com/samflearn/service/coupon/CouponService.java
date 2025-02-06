@@ -13,7 +13,6 @@ public class CouponService {
 
     private final CouponRepository couponRepository;
 
-
     public void getCouponService(Long couponId) {
 
         Coupon coupon = couponRepository.findById(couponId)

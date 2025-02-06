@@ -1,12 +1,8 @@
 package com.samflearn.common.entity.coupon;
 
-import com.samflearn.common.entity.course.Course;
-import com.samflearn.common.entity.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 @Entity
 @Getter
@@ -20,13 +16,13 @@ public class Coupon {
 
     private Long quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
+//    private User user;
 
-    // 낙관락 활용시 주석 해제 필요
-    @Version
-    private Long version;
+//     낙관락 활용시 주석 해제 필요
+//    @Version
+//    private Long version;
 
     public Coupon () {
 

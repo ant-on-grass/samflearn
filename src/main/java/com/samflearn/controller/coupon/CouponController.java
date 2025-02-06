@@ -17,8 +17,8 @@ public class CouponController {
     private final CouponService couponService;
 
     @PostMapping
-    public ResponseEntity<Void> getCoupon(@RequestParam Long couponId) {
-        couponService.getCouponService(couponId);
+    public ResponseEntity<Void> getCoupon(@RequestParam("couponId") Long couponId) {
+        couponService.getCouponServiceWithRedis(couponId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
